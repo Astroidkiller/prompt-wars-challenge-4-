@@ -265,7 +265,7 @@ function initAI() {
     const typingId  = `msg-${Date.now()}`;
     addChatMessage('Thinking…', 'ai typing', typingId);
 
-    const apiKey = localStorage.getItem('geminiApiKey');
+    const apiKey = localStorage.getItem('geminiApiKey') || (typeof CONFIG !== 'undefined' ? CONFIG.GEMINI_API_KEY : null);
 
     if (apiKey) {
       try {
@@ -291,7 +291,15 @@ function initAI() {
           }
         );
 
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          if (!res.ok) {
+            if (res.status === 429 || res.status >= 400) {
+              addChatMessage('⚠️ AI limit reached or invalid API Key. Please click "API Settings" below to provide your own Gemini API Key.', 'ai');
+              const el = document.getElementById(typingId);
+              if (el) el.remove();
+              return;
+            }
+            throw new Error(`HTTP ${res.status}`);
+          }
         const data  = await res.json();
         const reply = data.candidates?.[0]?.content?.parts?.[0]?.text ?? 'Could not parse response from Gemini.';
         updateChatMessage(typingId, reply, false);
