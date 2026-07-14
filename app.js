@@ -293,7 +293,7 @@ function initAI() {
                   ].join(' '),
                 }],
               }],
-              generationConfig: { maxOutputTokens: 200, temperature: 0.4 },
+              generationConfig: { maxOutputTokens: 2048, temperature: 0.4 },
             }),
           }
         );
@@ -376,7 +376,7 @@ function getFallbackResponse(query) {
   if (q.includes('zone 3') || (q.includes('critical') && q.includes('zone'))) {
     return 'Zone 3 (Fanzone South) is at 4.8 p/m² — above the 4.5 threshold. Redirecting fans to North Gate is in effect. Security team has been notified.';
   }
-  if (q.includes('crowd') || q.includes('density') || q.includes('zone') || q.includes('cround') || q.includes('people') || q.includes('fans') || q.includes('attendance') || q.includes('how many') || q.includes('how much')) {
+  if (q.includes('crowd') || q.includes('density') || q.includes('zone') || q.includes('croud') || q.includes('people') || q.includes('fans') || q.includes('attendance') || q.includes('how many') || q.includes('how much')) {
     return 'Current average density is 2.8 p/m² across all 16 active zones. Zone 3 is elevated at 4.8 p/m². All other zones are within safe thresholds.';
   }
   if (q.includes('evacuate') || q.includes('emergency') || q.includes('evacuati')) {
