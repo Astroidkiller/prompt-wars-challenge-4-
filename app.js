@@ -596,4 +596,4 @@ function initChatToggle() {
   }
 }
 
-if (typeof module !== 'undefined' && module.exports) { module.exports = { getThemeColors }; }
+if (typeof module !== 'undefined' && module.exports) { module.exports = { getThemeColors, getFallbackResponse, sleep, addChatMessage, updateChatMessage }; }
