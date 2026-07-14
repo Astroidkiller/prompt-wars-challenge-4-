@@ -979,6 +979,369 @@ body {
 .primary-btn:focus-visible { outline: 2px solid var(--accent-blue); outline-offset: 2px; }
 
 /* ──────────────────────────────────────────────────────
+   SIDEBAR FIFA LOGO
+────────────────────────────────────────────────────── */
+.fifa-logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.fifa-logo-img {
+  width: 110px;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-sm);
+  /* Keeps readability in both themes */
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.18));
+  transition: transform var(--spring);
+}
+.fifa-logo-img:hover { transform: scale(1.04); }
+
+.logo-sub {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* ──────────────────────────────────────────────────────
+   FOOTBALL HERO CARD (Dashboard)
+────────────────────────────────────────────────────── */
+.football-hero-card {
+  /* Dark card so the ball pops */
+  background: var(--text-primary) !important;
+  color: var(--bg-main);
+  border-color: var(--text-primary) !important;
+  min-height: 180px;
+  overflow: hidden;
+  position: relative;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 2.5rem !important;
+}
+
+/* The animated football scene on the right */
+.football-scene {
+  position: relative;
+  flex-shrink: 0;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ball-img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 50%;
+  animation: ballSpin 8s linear infinite, ballFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.45));
+  will-change: transform;
+}
+
+.ball-shadow {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 18px;
+  background: radial-gradient(ellipse, rgba(0,0,0,0.35) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: shadowPulse 3s ease-in-out infinite;
+}
+
+/* Hero text left side */
+.hero-text {
+  flex: 1;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 0.6rem;
+}
+
+[data-theme="light"] .hero-eyebrow { color: rgba(255,255,255,0.6); }
+
+.hero-title {
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+}
+
+.hero-sub {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+  max-width: 340px;
+}
+
+/* ──────────────────────────────────────────────────────
+   CHAT FAB (Floating Action Button — minimized state)
+────────────────────────────────────────────────────── */
+.chat-fab {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1.1rem 0.65rem 0.75rem;
+  background: var(--text-primary);
+  color: var(--bg-main);
+  border: none;
+  border-radius: 99px;
+  cursor: pointer;
+  box-shadow: var(--shadow-float);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: transform var(--spring), box-shadow var(--spring), opacity var(--fast);
+}
+
+.chat-fab:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.18);
+}
+
+.chat-fab:active { transform: scale(0.97); }
+
+.chat-fab:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 3px;
+}
+
+.chat-fab.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.9);
+}
+
+/* Football icon inside FAB */
+.fab-ball {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.fab-ball svg {
+  width: 28px;
+  height: 28px;
+  animation: fabBallSpin 6s linear infinite;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.2));
+}
+
+.fab-label {
+  white-space: nowrap;
+}
+
+/* Live dot on FAB */
+.fab-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.fab-dot.live {
+  background: var(--accent-green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ──────────────────────────────────────────────────────
+   CHAT PANEL (Expanded state)
+────────────────────────────────────────────────────── */
+.ai-chat-panel {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  z-index: 200;
+  width: 360px;
+  height: 500px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-float);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: background-color var(--spring), border-color var(--spring);
+
+  /* Hidden by default */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(16px) scale(0.96);
+  transform-origin: bottom right;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color var(--spring),
+              border-color var(--spring);
+}
+
+.ai-chat-panel.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* Panel header */
+.chat-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-main);
+  flex-shrink: 0;
+  transition: background-color var(--spring);
+}
+
+.ai-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.ai-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.ai-status-dot.live {
+  background: var(--accent-green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Minimize button */
+.chat-minimize-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--fast), color var(--fast);
+}
+.chat-minimize-btn:hover { background: var(--border-color); color: var(--text-primary); }
+.chat-minimize-btn:focus-visible { outline: 2px solid var(--accent-blue); outline-offset: 2px; }
+
+/* Chat body */
+.chat-body {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  scroll-behavior: smooth;
+}
+
+.chat-body::-webkit-scrollbar { width: 4px; }
+.chat-body::-webkit-scrollbar-track { background: transparent; }
+.chat-body::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 99px; }
+
+/* Messages */
+.message {
+  max-width: 88%;
+  padding: 0.65rem 0.875rem;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  animation: slideInMsg 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.message.ai {
+  align-self: flex-start;
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-bottom-left-radius: var(--radius-xs);
+  color: var(--text-primary);
+}
+
+.message.user {
+  align-self: flex-end;
+  background: var(--text-primary);
+  color: var(--bg-main);
+  border-bottom-right-radius: var(--radius-xs);
+}
+
+.message.typing { color: var(--text-muted); font-style: italic; }
+
+/* Input area */
+.chat-input-area {
+  padding: 0.875rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.chat-input-area input {
+  flex: 1;
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  padding: 0.625rem 0.875rem;
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color var(--fast);
+}
+.chat-input-area input:focus { border-color: var(--text-secondary); }
+.chat-input-area input::placeholder { color: var(--text-muted); }
+
+.chat-input-area button {
+  background: var(--text-primary);
+  color: var(--bg-main);
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity var(--fast), transform var(--fast);
+}
+.chat-input-area button:hover:not(:disabled) { opacity: 0.85; }
+.chat-input-area button:active:not(:disabled) { transform: scale(0.96); }
+.chat-input-area button:disabled { opacity: 0.4; cursor: not-allowed; }
+.chat-input-area button:focus-visible { outline: 2px solid var(--accent-blue); outline-offset: 2px; }
+
+/* ──────────────────────────────────────────────────────
    ANIMATIONS
 ────────────────────────────────────────────────────── */
 @keyframes fadeUp {
@@ -1001,3 +1364,37 @@ body {
   70%  { box-shadow: 0 0 0 5px rgba(16, 185, 129, 0); }
   100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
+
+/* Football spin — slow continuous rotation */
+@keyframes ballSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Floating bob up and down */
+@keyframes ballFloat {
+  0%, 100% { transform: rotate(0deg) translateY(0px); }
+  50%       { transform: rotate(180deg) translateY(-10px); }
+}
+
+/* Combined spin + float for hero ball */
+@keyframes ballSpinFloat {
+  0%   { transform: rotate(0deg) translateY(0); }
+  25%  { transform: rotate(90deg) translateY(-8px); }
+  50%  { transform: rotate(180deg) translateY(-14px); }
+  75%  { transform: rotate(270deg) translateY(-8px); }
+  100% { transform: rotate(360deg) translateY(0); }
+}
+
+/* Shadow shrinks as ball floats up */
+@keyframes shadowPulse {
+  0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.35; }
+  50%       { transform: translateX(-50%) scaleX(0.6); opacity: 0.15; }
+}
+
+/* FAB ball gentle spin */
+@keyframes fabBallSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+

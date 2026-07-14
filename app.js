@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCharts();
   initAI();
   initModal();
+  initChatToggle();
   showCrowdBadge();
 });
 
@@ -503,4 +504,80 @@ function initModal() {
 // ─────────────────────────────────────────────────────────
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// ─────────────────────────────────────────────────────────
+// CHAT TOGGLE — FAB open/close/minimize
+// ─────────────────────────────────────────────────────────
+function initChatToggle() {
+  const fab         = document.getElementById('chatFab');
+  const chatPanel   = document.getElementById('chatPanel');
+  const minimizeBtn = document.getElementById('chatMinimizeBtn');
+
+  if (!fab || !chatPanel) return;
+
+  // ── Open chat panel ──────────────────────────────────
+  function openChat() {
+    chatPanel.classList.add('open');
+    chatPanel.setAttribute('aria-hidden', 'false');
+    fab.classList.add('hidden');
+    fab.setAttribute('aria-expanded', 'true');
+
+    // Focus the input after animation completes
+    setTimeout(() => {
+      const input = document.getElementById('chatInput');
+      if (input) input.focus();
+    }, 380);
+  }
+
+  // ── Close / minimize chat panel ───────────────────────
+  function closeChat() {
+    chatPanel.classList.remove('open');
+    chatPanel.setAttribute('aria-hidden', 'true');
+    fab.classList.remove('hidden');
+    fab.setAttribute('aria-expanded', 'false');
+
+    // Return focus to FAB
+    setTimeout(() => fab.focus(), 380);
+  }
+
+  // Bind FAB click → open
+  fab.addEventListener('click', openChat);
+
+  // Bind minimize button → close
+  if (minimizeBtn) {
+    minimizeBtn.addEventListener('click', closeChat);
+  }
+
+  // Close on Escape key
+  chatPanel.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeChat();
+  });
+
+  // ── Focus trap inside chat panel ────────────────────
+  const focusable = 'button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  chatPanel.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const els   = [...chatPanel.querySelectorAll(focusable)].filter(el => el.offsetParent !== null);
+    const first = els[0];
+    const last  = els[els.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+    }
+  });
+
+  // ── Pause ball animation when chat is open (perf) ────
+  const ballImg = document.getElementById('footballBall');
+  if (ballImg) {
+    const obs = new MutationObserver(() => {
+      if (chatPanel.classList.contains('open')) {
+        ballImg.style.animationPlayState = 'paused';
+      } else {
+        ballImg.style.animationPlayState = 'running';
+      }
+    });
+    obs.observe(chatPanel, { attributes: true, attributeFilter: ['class'] });
+  }
 }

@@ -11,79 +11,59 @@
 
   <title>FIFA 2026 Operations | NexGen</title>
 
-  <!-- Geist Sans — clean geometric sans, no Inter slop -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
-
-  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
-  <!-- App logic deferred for performance -->
   <script src="app.js" defer></script>
 </head>
 <body>
-  <!-- Skip-to-content for keyboard users -->
   <a href="#mainContent" class="skip-link">Skip to main content</a>
 
   <div class="app-container">
 
-    <!-- ─── Sidebar ───────────────────────────────── -->
+    <!-- ─── Sidebar ─── -->
     <aside class="sidebar" aria-label="Main navigation">
+
+      <!-- FIFA 2026 Logo in sidebar header -->
       <div class="sidebar-header">
-        <div class="logo" aria-label="FIFA 2026 Ops">
-          <!-- FIFA triangle mark SVG -->
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-            <path d="M12 2L2 20h20L12 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            <circle cx="12" cy="14" r="2" fill="currentColor"/>
-          </svg>
-          <span>FIFA '26 Ops</span>
+        <div class="fifa-logo-wrap">
+          <img src="fifa-logo.png" alt="FIFA World Cup 2026 Official Logo" class="fifa-logo-img" width="120" height="auto" fetchpriority="high" decoding="async">
         </div>
+        <div class="logo-sub">Ops Intelligence Platform</div>
       </div>
 
       <nav class="nav-menu" aria-label="Module navigation">
         <button class="nav-btn active" data-target="dashboard" aria-current="page" data-testid="nav-dashboard">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-            <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>
-          </svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
           Dashboard
         </button>
-
         <button class="nav-btn" data-target="crowd" aria-current="false" data-testid="nav-crowd">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           Crowd Matrix
           <span class="nav-alert-badge" id="crowdBadge" aria-label="1 alert" role="status" style="display:none">1</span>
         </button>
-
         <button class="nav-btn" data-target="transport" aria-current="false" data-testid="nav-transport">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-            <rect x="2" y="7" width="20" height="13" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
-          </svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
           Transport
         </button>
-
         <button class="nav-btn" data-target="sustainability" aria-current="false" data-testid="nav-sustainability">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-            <path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12c0-2.76 1.12-5.26 2.93-7.07"/><path d="M12 6v6l4 2"/>
-          </svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12c0-2.76 1.12-5.26 2.93-7.07"/><path d="M12 6v6l4 2"/></svg>
           Sustainability
         </button>
       </nav>
 
       <div class="sidebar-footer">
         <button id="openSettingsBtn" class="settings-btn" aria-haspopup="dialog" data-testid="settings-btn">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-          </svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
           API Settings
         </button>
       </div>
     </aside>
 
-    <!-- ─── Main Content ───────────────────────────── -->
+    <!-- ─── Main Content ─── -->
     <main class="main-content" id="mainContent" role="main">
 
       <!-- Top Bar -->
@@ -95,23 +75,33 @@
             <span>Systems Nominal</span>
           </div>
           <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
-            <!-- Sun icon -->
-            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-              <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-            </svg>
-            <!-- Moon icon -->
-            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-            </svg>
+            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           </button>
         </div>
       </header>
 
-      <!-- ══ DASHBOARD ══════════════════════════════ -->
+      <!-- ══ DASHBOARD ══ -->
       <section id="view-dashboard" class="view-section active" aria-labelledby="pageTitle">
         <div class="bento-grid">
 
-          <!-- Live Attendance — col-span-2 -->
+          <!-- Football Hero Card — FIFA 2026 animated ball -->
+          <div class="bento-card football-hero-card col-span-3">
+            <div class="football-scene" aria-hidden="true">
+              <img src="football.png" alt="" class="ball-img" id="footballBall">
+              <div class="ball-shadow"></div>
+            </div>
+            <div class="hero-text">
+              <div class="hero-eyebrow">
+                <span class="dot live" style="width:6px;height:6px;" aria-hidden="true"></span>
+                Tournament in Progress · Day 34
+              </div>
+              <h2 class="hero-title">FIFA World Cup 2026</h2>
+              <p class="hero-sub">AI-powered operations across 16 host cities in USA, Mexico &amp; Canada.</p>
+            </div>
+          </div>
+
+          <!-- Live Attendance -->
           <div class="bento-card col-span-2">
             <div class="card-header">
               <h2 class="card-title">Live Attendance</h2>
@@ -119,7 +109,7 @@
             </div>
             <div class="card-body row-layout">
               <div class="metric">
-                <span class="metric-value" id="statMetlife" aria-label="84,291 fans at MetLife Stadium">84,291</span>
+                <span class="metric-value" id="statMetlife">84,291</span>
                 <span class="metric-label">MetLife Stadium, NJ</span>
               </div>
               <div class="metric-divider" role="separator" aria-hidden="true"></div>
@@ -135,7 +125,7 @@
             </div>
           </div>
 
-          <!-- AI Inference Stat -->
+          <!-- AI Inference -->
           <div class="bento-card">
             <div class="card-header">
               <h2 class="card-title">AI Inference</h2>
@@ -150,7 +140,7 @@
             </div>
           </div>
 
-          <!-- Global Ingress Flow Chart — col-span-2 row-span-2 -->
+          <!-- Ingress Chart -->
           <div class="bento-card col-span-2 row-span-2">
             <div class="card-header">
               <h2 class="card-title">Global Ingress Flow</h2>
@@ -161,7 +151,7 @@
             </div>
           </div>
 
-          <!-- System Logs — row-span-2 -->
+          <!-- System Logs -->
           <div class="bento-card row-span-2">
             <div class="card-header">
               <h2 class="card-title">System Logs</h2>
@@ -204,17 +194,14 @@
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
-      <!-- ══ CROWD MATRIX ════════════════════════════ -->
+      <!-- ══ CROWD MATRIX ══ -->
       <section id="view-crowd" class="view-section" aria-labelledby="crowdTitle">
         <div class="section-eyebrow">AI Safety Intelligence</div>
         <h2 class="section-title" id="crowdTitle">Crowd Matrix</h2>
         <div class="bento-grid">
-
-          <!-- Zone Density -->
           <div class="bento-card col-span-2">
             <div class="card-header">
               <h3 class="card-title">Zone Density — AT&amp;T Stadium</h3>
@@ -223,84 +210,37 @@
             <div class="card-body">
               <div class="progress-bar-container">
                 <div class="progress-label">Zone 1 — North Gate <span>2.1 p/m²</span></div>
-                <div class="progress-track" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="Zone 1 density 40%">
-                  <div class="progress-fill safe" style="width:40%"></div>
-                </div>
+                <div class="progress-track" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="Zone 1 density 40%"><div class="progress-fill safe" style="width:40%"></div></div>
               </div>
               <div class="progress-bar-container">
                 <div class="progress-label">Zone 2 — Concourse A <span>3.4 p/m²</span></div>
-                <div class="progress-track" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" aria-label="Zone 2 density 65%">
-                  <div class="progress-fill moderate" style="width:65%"></div>
-                </div>
+                <div class="progress-track" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" aria-label="Zone 2 density 65%"><div class="progress-fill moderate" style="width:65%"></div></div>
               </div>
               <div class="progress-bar-container">
                 <div class="progress-label">Zone 3 — Fanzone South <span>4.8 p/m²</span></div>
-                <div class="progress-track" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="Zone 3 density 90%">
-                  <div class="progress-fill critical" style="width:90%"></div>
-                </div>
+                <div class="progress-track" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="Zone 3 density 90%"><div class="progress-fill critical" style="width:90%"></div></div>
               </div>
               <div class="progress-bar-container">
                 <div class="progress-label">Zone 4 — East Egress <span>1.9 p/m²</span></div>
-                <div class="progress-track" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" aria-label="Zone 4 density 35%">
-                  <div class="progress-fill safe" style="width:35%"></div>
-                </div>
+                <div class="progress-track" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" aria-label="Zone 4 density 35%"><div class="progress-fill safe" style="width:35%"></div></div>
               </div>
             </div>
           </div>
-
-          <!-- Quick Stats -->
           <div class="bento-card">
-            <div class="card-header">
-              <h3 class="card-title">Zone Summary</h3>
-            </div>
+            <div class="card-header"><h3 class="card-title">Zone Summary</h3></div>
             <div class="card-body" style="gap:1rem">
-              <div class="zone-stat">
-                <span class="zone-dot critical"></span>
-                <div>
-                  <strong class="zone-count">1</strong>
-                  <span class="metric-label">Critical zone</span>
-                </div>
-              </div>
-              <div class="zone-stat">
-                <span class="zone-dot moderate"></span>
-                <div>
-                  <strong class="zone-count">1</strong>
-                  <span class="metric-label">Elevated zone</span>
-                </div>
-              </div>
-              <div class="zone-stat">
-                <span class="zone-dot safe"></span>
-                <div>
-                  <strong class="zone-count">14</strong>
-                  <span class="metric-label">Safe zones</span>
-                </div>
-              </div>
-              <div class="zone-stat">
-                <span class="zone-dot" style="background:var(--text-secondary)"></span>
-                <div>
-                  <strong class="zone-count">2.8</strong>
-                  <span class="metric-label">Avg p/m²</span>
-                </div>
-              </div>
+              <div class="zone-stat"><span class="zone-dot critical"></span><div><strong class="zone-count">1</strong><span class="metric-label">Critical zone</span></div></div>
+              <div class="zone-stat"><span class="zone-dot moderate"></span><div><strong class="zone-count">1</strong><span class="metric-label">Elevated zone</span></div></div>
+              <div class="zone-stat"><span class="zone-dot safe"></span><div><strong class="zone-count">14</strong><span class="metric-label">Safe zones</span></div></div>
+              <div class="zone-stat"><span class="zone-dot" style="background:var(--text-secondary)"></span><div><strong class="zone-count">2.8</strong><span class="metric-label">Avg p/m²</span></div></div>
             </div>
           </div>
-
-          <!-- Crowd Density Chart -->
           <div class="bento-card col-span-2">
-            <div class="card-header">
-              <h3 class="card-title">Density Trend — Live</h3>
-            </div>
-            <div class="card-body chart-container" style="min-height:180px">
-              <canvas id="crowdChart" role="img" aria-label="Crowd density trend over time across zones"></canvas>
-            </div>
+            <div class="card-header"><h3 class="card-title">Density Trend — Live</h3></div>
+            <div class="card-body chart-container" style="min-height:180px"><canvas id="crowdChart" role="img" aria-label="Crowd density trend over time across zones"></canvas></div>
           </div>
-
-          <!-- DIM-ICE Framework -->
           <div class="bento-card">
-            <div class="card-header">
-              <h3 class="card-title">DIM-ICE Framework</h3>
-              <span class="badge success">Active</span>
-            </div>
+            <div class="card-header"><h3 class="card-title">DIM-ICE Framework</h3><span class="badge success">Active</span></div>
             <div class="card-body">
               <ul class="dim-list">
                 <li><span class="dim-label">Design</span> East egress +2.4m</li>
@@ -312,154 +252,73 @@
               </ul>
             </div>
           </div>
-
         </div>
       </section>
 
-      <!-- ══ TRANSPORT ═══════════════════════════════ -->
+      <!-- ══ TRANSPORT ══ -->
       <section id="view-transport" class="view-section" aria-labelledby="transportTitle">
         <div class="section-eyebrow">6M Visitors · 16 Cities</div>
         <h2 class="section-title" id="transportTitle">Transport Network</h2>
         <div class="bento-grid">
-
-          <!-- Transit Status -->
           <div class="bento-card col-span-2">
-            <div class="card-header">
-              <h3 class="card-title">Live Transit Status</h3>
-              <span class="badge live-badge">Live</span>
-            </div>
+            <div class="card-header"><h3 class="card-title">Live Transit Status</h3><span class="badge live-badge">Live</span></div>
             <div class="card-body">
               <ul class="transit-list" aria-label="Transit lines status">
                 <li class="transit-item">
-                  <div class="transit-icon" aria-hidden="true">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
-                  </div>
-                  <div class="transit-info">
-                    <strong>JFK Airport Express</strong>
-                    <span>On time · Next arrival: 4 mins</span>
-                  </div>
+                  <div class="transit-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+                  <div class="transit-info"><strong>JFK Airport Express</strong><span>On time · Next arrival: 4 mins</span></div>
                   <span class="badge success">Active</span>
                 </li>
                 <li class="transit-item">
-                  <div class="transit-icon" aria-hidden="true">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                  </div>
-                  <div class="transit-info">
-                    <strong>Stadium Shuttle Loop C</strong>
-                    <span>Heavy traffic · Next arrival: 12 mins</span>
-                  </div>
+                  <div class="transit-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+                  <div class="transit-info"><strong>Stadium Shuttle Loop C</strong><span>Heavy traffic · Next arrival: 12 mins</span></div>
                   <span class="badge warning">Delayed</span>
                 </li>
                 <li class="transit-item">
-                  <div class="transit-icon" aria-hidden="true">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-                  </div>
-                  <div class="transit-info">
-                    <strong>TRE Commuter Rail</strong>
-                    <span>94% capacity · CentrePort +4 min</span>
-                  </div>
+                  <div class="transit-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg></div>
+                  <div class="transit-info"><strong>TRE Commuter Rail</strong><span>94% capacity · CentrePort +4 min</span></div>
                   <span class="badge warning">Near Full</span>
                 </li>
                 <li class="transit-item">
-                  <div class="transit-icon" aria-hidden="true">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                  </div>
-                  <div class="transit-info">
-                    <strong>ADA Accessible Shuttle</strong>
-                    <span>Low-floor ramp buses · Priority boarding</span>
-                  </div>
+                  <div class="transit-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+                  <div class="transit-info"><strong>ADA Accessible Shuttle</strong><span>Low-floor ramp buses · Priority boarding</span></div>
                   <span class="badge success">Active</span>
                 </li>
               </ul>
             </div>
           </div>
-
-          <!-- Parking Availability -->
           <div class="bento-card">
-            <div class="card-header">
-              <h3 class="card-title">Parking Occupancy</h3>
-            </div>
+            <div class="card-header"><h3 class="card-title">Parking Occupancy</h3></div>
             <div class="card-body">
-              <div class="progress-bar-container">
-                <div class="progress-label">AT&amp;T Stadium <span>72%</span></div>
-                <div class="progress-track"><div class="progress-fill moderate" style="width:72%"></div></div>
-              </div>
-              <div class="progress-bar-container">
-                <div class="progress-label">MetLife Stadium <span>58%</span></div>
-                <div class="progress-track"><div class="progress-fill safe" style="width:58%"></div></div>
-              </div>
-              <div class="progress-bar-container">
-                <div class="progress-label">SoFi Stadium <span>81%</span></div>
-                <div class="progress-track"><div class="progress-fill critical" style="width:81%"></div></div>
-              </div>
+              <div class="progress-bar-container"><div class="progress-label">AT&amp;T Stadium <span>72%</span></div><div class="progress-track"><div class="progress-fill moderate" style="width:72%"></div></div></div>
+              <div class="progress-bar-container"><div class="progress-label">MetLife Stadium <span>58%</span></div><div class="progress-track"><div class="progress-fill safe" style="width:58%"></div></div></div>
+              <div class="progress-bar-container"><div class="progress-label">SoFi Stadium <span>81%</span></div><div class="progress-track"><div class="progress-fill critical" style="width:81%"></div></div></div>
             </div>
           </div>
-
-          <!-- Travel Tips -->
           <div class="bento-card col-span-2">
-            <div class="card-header">
-              <h3 class="card-title">Fan Travel Guidance</h3>
-            </div>
+            <div class="card-header"><h3 class="card-title">Fan Travel Guidance</h3></div>
             <div class="card-body">
               <div class="tip-grid">
-                <div class="tip-item">
-                  <div class="tip-icon" aria-hidden="true">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  </div>
-                  <div>
-                    <strong>Arrive 2–3 Hours Early</strong>
-                    <p>Public transit strongly recommended over private vehicles.</p>
-                  </div>
-                </div>
-                <div class="tip-item">
-                  <div class="tip-icon" aria-hidden="true">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-                  </div>
-                  <div>
-                    <strong>Use the FIFA App</strong>
-                    <p>Real-time shuttle schedules, transit updates, and wayfinding.</p>
-                  </div>
-                </div>
-                <div class="tip-item">
-                  <div class="tip-icon" aria-hidden="true">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-                  </div>
-                  <div>
-                    <strong>Multi-Day Transit Pass</strong>
-                    <p>Cost-effective travel between fan zones, stadiums, and attractions.</p>
-                  </div>
-                </div>
+                <div class="tip-item"><div class="tip-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><strong>Arrive 2–3 Hours Early</strong><p>Public transit strongly recommended over private vehicles.</p></div></div>
+                <div class="tip-item"><div class="tip-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><div><strong>Use the FIFA App</strong><p>Real-time shuttle schedules, transit updates, and wayfinding.</p></div></div>
+                <div class="tip-item"><div class="tip-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div><strong>Multi-Day Transit Pass</strong><p>Cost-effective travel between fan zones, stadiums, and attractions.</p></div></div>
               </div>
             </div>
           </div>
-
-          <!-- Shuttle Wave Status -->
           <div class="bento-card">
-            <div class="card-header">
-              <h3 class="card-title">Shuttle Waves</h3>
-            </div>
+            <div class="card-header"><h3 class="card-title">Shuttle Waves</h3></div>
             <div class="card-body">
               <ul class="shuttle-list">
-                <li class="shuttle-item running">
-                  <span class="shuttle-dot" aria-hidden="true"></span>
-                  Wave 3 Active — Lot B → Gate A <span class="shuttle-eta">8 min</span>
-                </li>
-                <li class="shuttle-item delayed">
-                  <span class="shuttle-dot" aria-hidden="true"></span>
-                  Wave 4 — Lot C → Gate E <span class="shuttle-eta">21 min</span>
-                </li>
-                <li class="shuttle-item running">
-                  <span class="shuttle-dot" aria-hidden="true"></span>
-                  ADA Wave — North Lot <span class="shuttle-eta">3 min</span>
-                </li>
+                <li class="shuttle-item running"><span class="shuttle-dot" aria-hidden="true"></span>Wave 3 Active — Lot B → Gate A <span class="shuttle-eta">8 min</span></li>
+                <li class="shuttle-item delayed"><span class="shuttle-dot" aria-hidden="true"></span>Wave 4 — Lot C → Gate E <span class="shuttle-eta">21 min</span></li>
+                <li class="shuttle-item running"><span class="shuttle-dot" aria-hidden="true"></span>ADA Wave — North Lot <span class="shuttle-eta">3 min</span></li>
               </ul>
             </div>
           </div>
-
         </div>
       </section>
 
-      <!-- ══ SUSTAINABILITY ══════════════════════════ -->
+      <!-- ══ SUSTAINABILITY ══ -->
       <section id="view-sustainability" class="view-section" aria-labelledby="sustainTitle">
         <div class="section-eyebrow">Net-Zero Commitment</div>
         <h2 class="section-title" id="sustainTitle">Sustainability</h2>
@@ -469,10 +328,7 @@
             <div class="card-body">
               <span class="metric-value">2.4<span style="font-size:1rem;font-weight:400">MWh</span></span>
               <span class="metric-label">SoFi Stadium · Today</span>
-              <div class="stat-delta up">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
-                +14% vs yesterday
-              </div>
+              <div class="stat-delta up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>+14% vs yesterday</div>
             </div>
           </div>
           <div class="bento-card">
@@ -480,27 +336,15 @@
             <div class="card-body">
               <span class="metric-value">87<span style="font-size:1rem;font-weight:400">%</span></span>
               <span class="metric-label">Efficiency across all venues</span>
-              <div class="stat-delta up">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
-                On target
-              </div>
+              <div class="stat-delta up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>On target</div>
             </div>
           </div>
           <div class="bento-card col-span-2">
             <div class="card-header"><h3 class="card-title">Carbon Offset Progress</h3></div>
             <div class="card-body">
-              <div class="progress-bar-container">
-                <div class="progress-label">Overall Tournament Target <span>68%</span></div>
-                <div class="progress-track"><div class="progress-fill safe" style="width:68%"></div></div>
-              </div>
-              <div class="progress-bar-container">
-                <div class="progress-label">Public Transport Use <span>82%</span></div>
-                <div class="progress-track"><div class="progress-fill safe" style="width:82%"></div></div>
-              </div>
-              <div class="progress-bar-container">
-                <div class="progress-label">Waste Diversion from Landfill <span>91%</span></div>
-                <div class="progress-track"><div class="progress-fill safe" style="width:91%"></div></div>
-              </div>
+              <div class="progress-bar-container"><div class="progress-label">Overall Tournament Target <span>68%</span></div><div class="progress-track"><div class="progress-fill safe" style="width:68%"></div></div></div>
+              <div class="progress-bar-container"><div class="progress-label">Public Transport Use <span>82%</span></div><div class="progress-track"><div class="progress-fill safe" style="width:82%"></div></div></div>
+              <div class="progress-bar-container"><div class="progress-label">Waste Diversion from Landfill <span>91%</span></div><div class="progress-track"><div class="progress-fill safe" style="width:91%"></div></div></div>
             </div>
           </div>
         </div>
@@ -508,37 +352,66 @@
 
     </main>
 
-    <!-- ─── Floating GenAI Assistant ─────────────────── -->
-    <div class="ai-assistant-container" role="complementary" aria-label="AI Operations Assistant">
-      <div class="chat-header">
-        <div class="ai-title">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-            <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
-            <circle cx="9" cy="14" r="1" fill="currentColor"/><circle cx="15" cy="14" r="1" fill="currentColor"/>
-          </svg>
-          Ops Intelligence
-        </div>
-        <div class="ai-status-dot live" aria-hidden="true"></div>
+  </div><!-- end app-container -->
+
+  <!-- ─── Floating AI Chat (minimizable) ─── -->
+  <!-- Collapsed: just the FAB button -->
+  <button class="chat-fab" id="chatFab" aria-label="Open AI Operations Assistant" aria-expanded="false" aria-controls="chatPanel">
+    <!-- Football icon with spin animation on hover -->
+    <span class="fab-ball" aria-hidden="true">
+      <!-- SVG football -->
+      <svg width="26" height="26" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="48" fill="white" stroke="#e4e4e7" stroke-width="2"/>
+        <!-- Pentagon patches -->
+        <polygon points="50,18 63,30 58,45 42,45 37,30" fill="#18181b"/>
+        <polygon points="50,82 63,70 58,55 42,55 37,70" fill="#18181b"/>
+        <polygon points="18,50 30,37 45,42 45,58 30,63" fill="#18181b"/>
+        <polygon points="82,50 70,37 55,42 55,58 70,63" fill="#18181b"/>
+        <polygon points="21,33 33,25 40,35 33,47 20,44" fill="#18181b"/>
+        <polygon points="79,33 67,25 60,35 67,47 80,44" fill="#18181b"/>
+        <polygon points="21,67 33,75 40,65 33,53 20,56" fill="#18181b"/>
+        <polygon points="79,67 67,75 60,65 67,53 80,56" fill="#18181b"/>
+      </svg>
+    </span>
+    <span class="fab-label">AI Assistant</span>
+    <span class="fab-dot live" aria-hidden="true"></span>
+  </button>
+
+  <!-- Expanded chat panel -->
+  <div class="ai-chat-panel" id="chatPanel" aria-hidden="true" role="dialog" aria-modal="true" aria-label="AI Operations Assistant">
+    <div class="chat-panel-header">
+      <div class="ai-title">
+        <svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="50" cy="50" r="48" fill="currentColor" opacity="0.15" stroke="currentColor" stroke-width="3"/>
+          <polygon points="50,18 63,30 58,45 42,45 37,30" fill="currentColor"/>
+          <polygon points="50,82 63,70 58,55 42,55 37,70" fill="currentColor"/>
+          <polygon points="18,50 30,37 45,42 45,58 30,63" fill="currentColor"/>
+          <polygon points="82,50 70,37 55,42 55,58 70,63" fill="currentColor"/>
+        </svg>
+        Ops Intelligence
+        <span class="ai-status-dot live" aria-hidden="true"></span>
       </div>
-      <div class="chat-body" id="chatBody" aria-live="polite" aria-label="Chat messages">
-        <div class="message ai">
-          System initialized. I can assist with crowd density, transport routing, venue operations, and sustainability data. What do you need?
-        </div>
-      </div>
-      <div class="chat-input-area">
-        <label for="chatInput" class="sr-only">Message the AI assistant</label>
-        <input type="text" id="chatInput" placeholder="Ask about crowd flow, transit, alerts..." autocomplete="off" spellcheck="false" data-testid="chat-input">
-        <button id="sendBtn" aria-label="Send message" data-testid="send-btn">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
-          </svg>
-        </button>
+      <button class="chat-minimize-btn" id="chatMinimizeBtn" aria-label="Minimize AI assistant">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="18 15 12 21 6 15"/></svg>
+      </button>
+    </div>
+
+    <div class="chat-body" id="chatBody" aria-live="polite" aria-label="Chat messages">
+      <div class="message ai">
+        System initialized. I can assist with crowd density, transport routing, venue operations, and sustainability data. What do you need?
       </div>
     </div>
 
+    <div class="chat-input-area">
+      <label for="chatInput" class="sr-only">Message the AI assistant</label>
+      <input type="text" id="chatInput" placeholder="Ask about crowd flow, transit, alerts..." autocomplete="off" spellcheck="false" data-testid="chat-input">
+      <button id="sendBtn" aria-label="Send message" data-testid="send-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
   </div>
 
-  <!-- ─── Settings Modal ─────────────────────────────── -->
+  <!-- ─── Settings Modal ─── -->
   <div id="settingsModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
     <div class="modal-content">
       <div class="modal-header">
@@ -546,7 +419,7 @@
         <button id="closeModalBtn" class="close-btn" aria-label="Close settings modal">&times;</button>
       </div>
       <div class="modal-body">
-        <p class="modal-desc">Enter your Gemini API key to enable live GenAI reasoning. Keys are stored only in your browser's local storage — never transmitted to our servers or committed to the repository.</p>
+        <p class="modal-desc">Enter your Gemini API key to enable live GenAI reasoning. Keys are stored only in your browser's local storage — never committed to the repository.</p>
         <div class="input-group">
           <label for="apiKeyInput">Gemini API Key</label>
           <input type="password" id="apiKeyInput" placeholder="AIzaSy..." autocomplete="off">
