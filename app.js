@@ -36,18 +36,21 @@ document.addEventListener('DOMContentLoaded', () => {
 function initTheme() {
   const htmlEl = document.documentElement;
   const toggleBtn = document.getElementById('themeToggle');
+  const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 
   // Restore saved theme or infer from system preference
   const saved = localStorage.getItem('fifa-theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const theme = saved ?? (prefersDark ? 'dark' : 'light');
   htmlEl.setAttribute('data-theme', theme);
+  if (metaThemeColor) metaThemeColor.setAttribute('content', theme === 'dark' ? '#09090b' : '#f4f4f5');
 
   toggleBtn.addEventListener('click', () => {
     const isDark = htmlEl.getAttribute('data-theme') === 'dark';
     const next = isDark ? 'light' : 'dark';
     htmlEl.setAttribute('data-theme', next);
     localStorage.setItem('fifa-theme', next);
+    if (metaThemeColor) metaThemeColor.setAttribute('content', next === 'dark' ? '#09090b' : '#f4f4f5');
     updateChartTheme(next);
   });
 }
