@@ -1,26 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prompt Wars Assistant</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Minimalist FIFA 2026 GenAI Operations Hub">
+  <title>FIFA 2026 Operations | NexGen</title>
+  
+  <!-- Fonts: Inter for ultra-clean minimalist typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Chart.js for minimalist data visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <main id="app" role="main" aria-label="Prompt Wars Assistant">
-    <section class="chat-container" aria-live="polite" aria-atomic="false">
-      <div id="chat" class="chat-messages"></div>
-    </section>
-    <section class="input-section">
-      <form id="chatForm" autocomplete="off">
-        <input type="text" id="userInput" placeholder="Ask me anything..." aria-label="User input" required />
-        <button type="submit" aria-label="Send message">Send</button>
-      </form>
-    </section>
-  </main>
-  <script src="script.js"></script>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 22h20L12 2z"/></svg>
+          <span>FIFA '26 Ops</span>
+        </div>
+      </div>
+      
+      <nav class="nav-menu">
+        <button class="nav-btn active" data-target="dashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </button>
+        <button class="nav-btn" data-target="crowd">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Crowd Matrix
+        </button>
+        <button class="nav-btn" data-target="transport">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="2" ry="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><path d="M6 7v-4h12v4"/></svg>
+          Transport
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="openSettingsBtn" class="settings-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          API Settings
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <h1 class="page-title" id="pageTitle">Dashboard</h1>
+        <div class="top-actions">
+          <div class="status-indicator">
+            <span class="dot live"></span> Systems Nominal
+          </div>
+          <div id="themeToggle" class="theme-toggle">
+            <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </div>
+        </div>
+      </header>
+
+      <!-- View: Dashboard (Bento Grid) -->
+      <section id="view-dashboard" class="view-section active">
+        <div class="bento-grid">
+          
+          <!-- Key Metrics -->
+          <div class="bento-card col-span-2">
+            <div class="card-header">
+              <h3>Live Attendance</h3>
+              <span class="badge">Matchday 14</span>
+            </div>
+            <div class="card-body row-layout">
+              <div class="metric">
+                <span class="metric-value">84,291</span>
+                <span class="metric-label">MetLife Stadium</span>
+              </div>
+              <div class="metric divider"></div>
+              <div class="metric">
+                <span class="metric-value">68,432</span>
+                <span class="metric-label">SoFi Stadium</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bento-card">
+            <div class="card-header">
+              <h3>AI Inference</h3>
+            </div>
+            <div class="card-body">
+              <div class="metric">
+                <span class="metric-value">4.2ms</span>
+                <span class="metric-label">Avg Latency</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chart Area -->
+          <div class="bento-card col-span-2 row-span-2">
+            <div class="card-header">
+              <h3>Global Ingress Flow</h3>
+            </div>
+            <div class="card-body chart-container">
+              <canvas id="flowChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Operations Log -->
+          <div class="bento-card row-span-2">
+            <div class="card-header">
+              <h3>System Logs</h3>
+            </div>
+            <div class="card-body">
+              <ul class="log-list">
+                <li><span class="time">14:02</span> Gate 4 opened early due to crowd build-up.</li>
+                <li><span class="time">13:58</span> Metro Line B delayed by 5 mins.</li>
+                <li><span class="time">13:45</span> All security checkpoints nominal.</li>
+                <li><span class="time">13:30</span> AI models synced to edge nodes.</li>
+              </ul>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- View: Crowd Matrix -->
+      <section id="view-crowd" class="view-section">
+        <div class="bento-grid">
+          <div class="bento-card col-span-3">
+            <div class="card-header">
+              <h3>Density Heatmap Analysis</h3>
+              <span class="badge warning">Zone 3 Elevated</span>
+            </div>
+            <div class="card-body">
+              <div class="progress-bar-container">
+                <div class="progress-label">Zone 1 (North Gate) <span>2.1 p/m²</span></div>
+                <div class="progress-track"><div class="progress-fill safe" style="width: 40%;"></div></div>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-label">Zone 2 (Concourse A) <span>3.4 p/m²</span></div>
+                <div class="progress-track"><div class="progress-fill moderate" style="width: 65%;"></div></div>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-label">Zone 3 (Fanzone South) <span>4.8 p/m²</span></div>
+                <div class="progress-track"><div class="progress-fill critical" style="width: 90%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- View: Transport -->
+      <section id="view-transport" class="view-section">
+        <div class="bento-card">
+          <div class="card-header">
+            <h3>Transit Network Status</h3>
+          </div>
+          <div class="card-body">
+            <ul class="transit-list">
+              <li>
+                <div class="transit-icon">🚈</div>
+                <div class="transit-info">
+                  <strong>JFK Airport Express</strong>
+                  <span>On time · Next arrival: 4 mins</span>
+                </div>
+                <span class="badge success">Active</span>
+              </li>
+              <li>
+                <div class="transit-icon">🚌</div>
+                <div class="transit-info">
+                  <strong>Stadium Shuttle Loop C</strong>
+                  <span>Heavy traffic · Next arrival: 12 mins</span>
+                </div>
+                <span class="badge warning">Delayed</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Floating GenAI Assistant -->
+    <div class="ai-assistant-container">
+      <div class="chat-header">
+        <div class="ai-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10v4a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h4M12 2a10 10 0 0 0-10 10v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H4"/></svg>
+          Ops Intelligence
+        </div>
+      </div>
+      <div class="chat-body" id="chatBody">
+        <div class="message ai">
+          System initialized. How can I assist with stadium operations today?
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="Ask about crowd flow, transit..." autocomplete="off">
+        <button id="sendBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Settings Modal for API Key -->
+  <div id="settingsModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>AI Integration Settings</h3>
+        <button id="closeModalBtn" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">Enter your Gemini API key to enable live GenAI responses. If left blank, the assistant will use a local fallback engine.</p>
+        <div class="input-group">
+          <label for="apiKeyInput">Gemini API Key</label>
+          <input type="password" id="apiKeyInput" placeholder="AIzaSy...">
+        </div>
+        <button id="saveSettingsBtn" class="primary-btn">Save Configuration</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
