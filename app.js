@@ -584,3 +584,5 @@ function initChatToggle() {
     obs.observe(chatPanel, { attributes: true, attributeFilter: ['class'] });
   }
 }
+
+if (typeof module !== 'undefined' && module.exports) { module.exports = { getThemeColors }; }

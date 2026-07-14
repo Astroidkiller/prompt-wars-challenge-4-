@@ -1,0 +1,29 @@
+{
+  "name": "prompt-wars-challenge-4",
+  "version": "1.0.0",
+  "description": "[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) [![No dependencies](https://img.shields.io/badge/dependencies-none-blue.svg)]() [![Repo size](https://img.shields.io/badge/size-%3C100KB-brightgreen.svg)]() [![WCAG 2.1 AA](https://img.shields.io/badge/a11y-WCAG%202.1%20AA-informational.svg)]()",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Astroidkiller/prompt-wars-challenge-4-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Astroidkiller/prompt-wars-challenge-4-/issues"
+  },
+  "homepage": "https://github.com/Astroidkiller/prompt-wars-challenge-4-#readme",
+  "devDependencies": {
+    "dotenv": "^17.4.2",
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}
