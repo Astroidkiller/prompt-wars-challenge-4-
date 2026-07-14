@@ -299,19 +299,15 @@ function initAI() {
         );
 
           if (!res.ok) {
-            if (res.status === 429 || res.status >= 400) {
-              addChatMessage('⚠️ AI limit reached or invalid API Key. Please click "API Settings" below to provide your own Gemini API Key.', 'ai');
-              const el = document.getElementById(typingId);
-              if (el) el.remove();
-              return;
-            }
             throw new Error(`HTTP ${res.status}`);
           }
         const data  = await res.json();
         const reply = data.candidates?.[0]?.content?.parts?.[0]?.text ?? 'Could not parse response from Gemini.';
         updateChatMessage(typingId, reply, false);
       } catch (err) {
-        updateChatMessage(typingId, `Request failed: ${err.message}. Check your API key in Settings.`, false);
+        console.warn('API fetch failed, falling back to local engine:', err);
+        await sleep(500);
+        updateChatMessage(typingId, getFallbackResponse(text), false);
       }
     } else {
       // Fallback engine — expanded to 20+ scenarios
@@ -380,7 +376,7 @@ function getFallbackResponse(query) {
   if (q.includes('zone 3') || (q.includes('critical') && q.includes('zone'))) {
     return 'Zone 3 (Fanzone South) is at 4.8 p/m² — above the 4.5 threshold. Redirecting fans to North Gate is in effect. Security team has been notified.';
   }
-  if (q.includes('crowd') || q.includes('density') || q.includes('zone')) {
+  if (q.includes('crowd') || q.includes('density') || q.includes('zone') || q.includes('cround') || q.includes('people') || q.includes('fans') || q.includes('attendance') || q.includes('how many') || q.includes('how much')) {
     return 'Current average density is 2.8 p/m² across all 16 active zones. Zone 3 is elevated at 4.8 p/m². All other zones are within safe thresholds.';
   }
   if (q.includes('evacuate') || q.includes('emergency') || q.includes('evacuati')) {
@@ -427,7 +423,7 @@ function getFallbackResponse(query) {
   if (q.includes('ai') || q.includes('system') || q.includes('status') || q.includes('uptime')) {
     return 'All AI inference nodes are nominal. Average latency: 4.2ms. System uptime: 98.7%. Edge nodes last synced at 13:30 local time.';
   }
-  if (q.includes('help') || q.includes('what can') || q.includes('commands') || q.includes('capabilities')) {
+  if (q.includes('help') || q.includes('what can') || q.includes('commands') || q.includes('capabilities') || q.includes('hi') || q.includes('hello') || q.includes('hey')) {
     return 'I can assist with: crowd density alerts, transport routing, shuttle status, parking, venue access, match fixtures, ADA services, sustainability data, and system health. What do you need?';
   }
   if (q.includes('weather') || q.includes('temperature') || q.includes('heat')) {
