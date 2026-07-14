@@ -1,3 +1,4 @@
+/** @jest-environment jsdom */
 const { getThemeColors } = require('./app.js');
 
 describe('getThemeColors', () => {
@@ -15,5 +16,18 @@ describe('getThemeColors', () => {
     expect(colors.title).toBe('#18181b');
     expect(colors.grid).toBe('#e4e4e7');
     expect(colors.tick).toBe('#a1a1aa');
+  });
+});
+
+describe('DOM Initialization', () => {
+  it('should have a clean document body', () => {
+    expect(document.body.innerHTML).toBe('');
+    
+    // Simulate setting up a basic DOM element
+    const div = document.createElement('div');
+    div.id = 'app';
+    document.body.appendChild(div);
+    
+    expect(document.getElementById('app')).not.toBeNull();
   });
 });
